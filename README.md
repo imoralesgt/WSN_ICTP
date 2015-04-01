@@ -5,7 +5,7 @@ WSN Implemented from scratch. Revision 2 - working at ICTP
 
 ToDo:
 + Node side
-  - Battery measurement, monitoring and alerting for each 
+  - Battery measurement, monitoring and alerting for each node
   - Improve battery lifetime
     * May be turning sensors off should be the best solution (radios are working great)
     * Firmware fine-tuning and optimization
@@ -14,8 +14,7 @@ ToDo:
 
 
 + Gateway side
-  - Remove CIK from SC and read it from a text file
   - ThingSpeak server @ Raspberry PI
-  - Fix date format bug on CSV LOG file
+  - Remove CIK from SC and read it from a text file
   - Design a PCB (as a Raspberry PI Hat. Using only MSP430 uC, without any Launchpad)
   - 3D-printable case
