@@ -203,8 +203,16 @@ class logger(object):
 		return self.rPI
 
 	def translateDate(self, day, month, year):
-		MONTHS = ('Jan', 'Feb', 'Mar', 'Apr', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec')
-		return str(year)+str(MONTHS.index(month)+2)+str(day)
+		MONTHS = ('Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec')
+		month = MONTHS.index(month) + 1
+		if month < 10:
+			month = '0' + str(month)
+		if day < 10:
+			day = '0' + str(day)
+		day = str(day)
+		month = str(month)
+		year = str(year)
+		return year + month + day
 
 	def translateTime(self, time):
 		timeSplit = time.split(':')
