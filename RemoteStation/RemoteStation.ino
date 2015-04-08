@@ -7,7 +7,7 @@
 #include <dht11.h>     //Humidity sensor
 #include <RTCplus.h>   //Real time clock
 
-#define SENSOR_COUNT 4
+#define SENSOR_COUNT 5
 
 //const byte IRQ_PIN      = P2_2; //NRF24L01+ IRQ Pin
 const byte CS_PIN      = P2_2; //NRF24L01+ CS Pin
@@ -73,6 +73,8 @@ void setup() {
   }
 
   Serial.begin(9600);
+  analogReference(INTERNAL1V5); //Set 1.5V internal reference as Vref+
+                                //Used to measure baterry voltage
   radioInit();
   
   //dump_radio_status_to_serialport(radio.radioState());
@@ -119,7 +121,9 @@ void loop() {
          //int hum = humSensor.temperature;
          
          uint16_t lux = lightMeter.readLightLevel();
-         
+         uint16_t bat = analogRead(11);
+         bat = 60*bat/1023; 
+         bat = 50*bat; //Converting ADC reading to voltage (mV)
          radioInit(); //Init radio as Tx
          radio.setTXaddress((void*)txaddr);
   
@@ -129,17 +133,19 @@ void loop() {
          sensorData[1] = (PSensor.pressure+50)/100; //hPa
          sensorData[2] = lux;                       //Luxes
          sensorData[3] = hum;                       //%HR
+         sensorData[4] = bat;                       //Battery level
   
          
          /*
          Radio data will be sent as:
-         MY_ID,TEMP,PRESS,LUX,HUM,HASH
+         MY_ID,TEMP,PRESS,LUX,HUM,BAT
          
          MY_ID <= UNIQUE NODE ID
          TEMP  <= TEMPERATURE*10 (FIXED POINT)
          PRESS <= ATM. PRESSURE (hPa)
-         LUX   <= LIGHT METER MEASUREMENT
-         HUM   <= RELATIVE HUMIDITY
+         LUX   <= LIGHT METER MEASUREMENT (lux)
+         HUM   <= RELATIVE HUMIDITY (%)
+         BAT   <= BATTERY VOLTAGE (mV)
          */
          
          //long sum = rxaddr[4];
@@ -149,7 +155,7 @@ void loop() {
          //radio.print(sensorData[0]/10); //Send temperature
          //radio.print(".");
          //radio.print(sensorData[0]%10); //Send one-digit decimal temperature
-         for (i = 0; i < SENSOR_COUNT; i++){ //Send sensor data, excepting temperature
+         for (i = 0; i < SENSOR_COUNT; i++){ //Send sensors' data
            //sum += sensorData[i];
            radio.print(sensorData[i]);
            radio.print(","); //Comma-separated values
