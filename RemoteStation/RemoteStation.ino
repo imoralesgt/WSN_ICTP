@@ -52,6 +52,7 @@ void radioInit();
 void sensorsInit();
 void enableRx();
 void setLocalAddress(void);
+void startupLedBlink(void);
 
 void setup() {
   
@@ -82,9 +83,12 @@ void setup() {
   pinMode(P1_0, OUTPUT);
   digitalWrite(P1_0, LOW);
   
+  startupLedBlink();
+
   enableRx();  // Start listening
   rtc.begin();
   now = timeMinutes();
+
 }
 
 void loop() {
@@ -152,6 +156,7 @@ void loop() {
          int i;
          radio.print(rxaddr[4]); //Send my Address
          radio.print(",");
+         digitalWrite(P1_0, HIGH);
          //radio.print(sensorData[0]/10); //Send temperature
          //radio.print(".");
          //radio.print(sensorData[0]%10); //Send one-digit decimal temperature
@@ -160,11 +165,11 @@ void loop() {
            radio.print(sensorData[i]);
            radio.print(","); //Comma-separated values
          }
+         digitalWrite(P1_0, LOW);
          //byte hash = (sum%256); //Simple hash used as checksum
          //radio.print(hash);
          //radio.print(",");
          radio.flush(); //Send the data that has been put in the radio's output buffer
-         digitalWrite(P1_0, LOW); //Data sent, turn LED OFF.
      /*           
       //}else if(!strcmp(inbuf, STR_SET_TIMEOUT)){
       //}else{
@@ -200,6 +205,17 @@ void loop() {
     dco1MHz(); //Set DCO's speed to 1MHz
     __bis_status_register(LPM1_bits); //Low-Power Mode 1
   } 
+}
+
+
+void startupLedBlink(void){
+  int i;
+  for(i = 0; i < 6; i++){
+    digitalWrite(P1_0, 1);
+    delay(50);
+    digitalWrite(P1_0, 0);
+    delay(50);
+  }
 }
 
 byte validateTimeOut(){ //Has already passed enough time to wake up?
@@ -251,7 +267,7 @@ interrupt(TIMER1_A0_VECTOR) Tic_Tac(void){
 void enableRx(){
   radio.setRXaddress(rxaddr);
   radio.enableRX();
-  digitalWrite(LED1, HIGH);
+  //digitalWrite(LED1, HIGH);
 }
 
 void radioInit(){
