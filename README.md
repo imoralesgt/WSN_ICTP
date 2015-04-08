@@ -6,7 +6,7 @@ WSN Implemented from scratch. Revision 2 - working at ICTP
 ToDo:
 + Node side
   - (DONE) Battery measurement and monitoring for each node
-  - Low-battery alerting for each node on Exosite
+  - (DONE) Low-battery alerting for each node on Exosite
   - Improve battery lifetime
     * (DONE) [Nothing to fix :'(] May be turning sensors off should be the best solution (radios are working great)
     * Firmware fine-tuning and optimization
