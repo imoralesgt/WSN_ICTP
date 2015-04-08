@@ -11,10 +11,14 @@ class exosite(object):
 
 	VARIABLES = ('temperatura', 'presion', 'humedad', 'luminosidad', 'bateria')
 
-	def __init__(self, CIK, setOfSensorAliases = {}):
+	def __init__(self, setOfSensorAliases = {}):
 		
-		self.CIK = CIK
+		self.CIK = self.loadCIK()
 		self.sensors = setOfSensorAliases
+
+	def loadCIK(self, fileName = 'exosite.key'):
+		keyFile = open(fileName, 'r')
+		return keyFile.read()
 
 	def getSensors(self):
 		return self.sensors
