@@ -9,7 +9,7 @@ class exosite(object):
 
 	SERVER  = 'm2.exosite.com'
 
-	VARIABLES = ('temperatura', 'presion', 'humedad', 'luminosidad')
+	VARIABLES = ('temperatura', 'presion', 'humedad', 'luminosidad', 'bateria')
 
 	def __init__(self, CIK, setOfSensorAliases = {}):
 		
@@ -48,7 +48,8 @@ class exosite(object):
 				pres = int(data[2])
 				lux  = int(data[3])
 				hum  = int(data[4])
-				collectedData = [temp, pres, hum, lux]
+				bat  = int(data[5])
+				collectedData = [temp, pres, hum, lux, bat]
 				newData = {}
 				j = 0
 				for i in self.VARIABLES:
