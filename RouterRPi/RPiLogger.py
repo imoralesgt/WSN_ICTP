@@ -30,6 +30,8 @@ import serial
 import time
 from exosite import exosite
 
+DELAY_BETWEEN_SAMPLES = 10
+
 class GUI(object):
 	def __init__(self, rPI = True):
 		self.rPI = rPI
@@ -93,7 +95,7 @@ class GUI(object):
 
 class logger(object):
 
-	RF_TIMEOUT = 120 #Timeout seconds between MSP430 uC
+	RF_TIMEOUT = DELAY_BETWEEN_SAMPLES #Timeout seconds between MSP430 uC
 	CIK = '8f3af3df6ee1ea3340ef9897ca6c139a160859e6'
 
 	def __init__(self, rPI = True, url = ""):

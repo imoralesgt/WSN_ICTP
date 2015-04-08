@@ -2,9 +2,14 @@ import urllib
 import httplib
 import socket
 
+#DEBUG = True
+DEBUG = False
+
 class exosite(object):
 
 	SERVER  = 'm2.exosite.com'
+
+	VARIABLES = ('temperatura', 'presion', 'humedad', 'luminosidad')
 
 	def __init__(self, CIK, setOfSensorAliases = {}):
 		
@@ -33,21 +38,51 @@ class exosite(object):
 
 	def formatAndUpdateData(self, data):
 		try:
-			data = data.split(',')[:-1]
+			data = data.split(',')
+			if DEBUG:
+				print 'DATA: ' + str(data)
 			if len(data) > 1:
+				data = data[:-1]
 				node = data[0]
 				temp = float(data[1])
 				pres = int(data[2])
 				lux  = int(data[3])
 				hum  = int(data[4])
+				collectedData = [temp, pres, hum, lux]
+				newData = {}
+				j = 0
+				for i in self.VARIABLES:
+					newData[i] = collectedData[j]
+					j += 1
+				for i in newData:
+					self.updateSensor(str(i) + str(node), newData[i])
+				'''
 				self.updateSensor('temperatura'+str(node),temp)
 				self.updateSensor('presion'+str(node),pres)
 				self.updateSensor('humedad'+str(node),hum)
 				self.updateSensor('luminosidad'+str(node),lux)
+				'''
 				return True
 			else:
+				node = int(data[0].split("#")[-1]) #If "SIN RESPUESTA DE ESTACION #xxxx" was read from Serial Port
+				if DEBUG:
+					print 'Sin respuesta!  Nodo #' + str(node) #Just for debugging purposes
+				temp = None
+				pres = None
+				lux = None
+				hum = None
+				for i in self.VARIABLES:
+					self.removeSensor(i+str(node))
+				'''
+				self.removeSensor('temperatura'+str(node))
+				self.removeSensor('presion'+str(node))
+				self.removeSensor('humedad'+str(node))
+				self.removeSensor('luminosidad'+str(node))
+				'''
 				return False
-		except:
+		except Exception as e:
+			if DEBUG:
+				print e
 			return None
 
 	def pushData(self):

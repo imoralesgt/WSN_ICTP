@@ -99,7 +99,7 @@ void loop() {
   if (radio.read(inbuf)) { //If some data was received
     delay(10);
     tOut = splitBufferToTimeOut(inbuf);
-    Serial.println(tOut);
+    //Serial.println(tOut);
     if (tOut > 0){ 
       TIME_OUT = tOut;
     //if (!strcmp(inbuf, STR_RQST_DATA)){
@@ -267,13 +267,13 @@ void sensorsInit(){
 unsigned int splitBufferToTimeOut(char *buffer){
   char data[5][33];
   int i = 0;
-  char *token;
+  char *token, *basura;
   char *search = ",";
   token = strtok(buffer, search);
   while(token != NULL){
     strcpy(data[i], token);
-    Serial.println(data[i]);
-    //data[i] = atoi(token);
+    //Serial.println(data[i]);
+    strcpy(basura, data[i]); //Simply it doesn't work if I don't do this
     token = strtok(NULL, search);
     i++;
   }
@@ -281,6 +281,6 @@ unsigned int splitBufferToTimeOut(char *buffer){
     return atoi(data[1]);
   }else{
     return 0;
-  }  
+  }
 }
 
