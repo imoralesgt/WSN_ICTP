@@ -1,6 +1,7 @@
 import urllib 
 import httplib
 import socket
+import os
 
 #DEBUG = True
 DEBUG = False
@@ -17,6 +18,7 @@ class exosite(object):
 		self.sensors = setOfSensorAliases
 
 	def loadCIK(self, fileName = 'exosite.key'):
+		fileName = str(os.path.dirname(os.path.realpath(__file__))) + '/' + fileName
 		keyFile = open(fileName, 'r')
 		return keyFile.read()
 
