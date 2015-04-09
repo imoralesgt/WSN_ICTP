@@ -21,3 +21,4 @@ ToDo:
   - Remove CIK from SC and read it from a text file
   - Design a PCB (as a Raspberry PI Hat. Using only MSP430 uC, without any Launchpad)
   - 3D-printable case
+  - Highstock graphs for a nice data visualization (http://www.highcharts.com/products/highstock)
