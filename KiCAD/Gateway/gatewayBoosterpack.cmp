@@ -1,0 +1,80 @@
+Cmp-Mod V01 Created by Cvpcb (after 2015-mar-04 BZR unknown)-product   date = 10/04/2015 15:04:31
+
+BeginCmp
+TimeStamp = /55269403;
+Reference = D1;
+ValeurCmp = LED;
+IdModule  = LEDs:LED-1206;
+EndCmp
+
+BeginCmp
+TimeStamp = /55282DC9;
+Reference = P1;
+ValeurCmp = Raspberry PI;
+IdModule  = Pin_Headers:Pin_Header_Straight_2x07;
+EndCmp
+
+BeginCmp
+TimeStamp = /5526EE02;
+Reference = P2;
+ValeurCmp = PGM_MSP430;
+IdModule  = Pin_Headers:Pin_Header_Straight_1x04;
+EndCmp
+
+BeginCmp
+TimeStamp = /552864D4;
+Reference = P3;
+ValeurCmp = CONN_01X06;
+IdModule  = Pin_Headers:Pin_Header_Straight_1x06;
+EndCmp
+
+BeginCmp
+TimeStamp = /5527F677;
+Reference = R1;
+ValeurCmp = 220;
+IdModule  = Resistors_SMD:R_1206_HandSoldering;
+EndCmp
+
+BeginCmp
+TimeStamp = /5527059E;
+Reference = R2;
+ValeurCmp = 270;
+IdModule  = Resistors_SMD:R_1206_HandSoldering;
+EndCmp
+
+BeginCmp
+TimeStamp = /55269558;
+Reference = R3;
+ValeurCmp = 1k;
+IdModule  = Resistors_SMD:R_1206_HandSoldering;
+EndCmp
+
+BeginCmp
+TimeStamp = /55274774;
+Reference = U1;
+ValeurCmp = MSP430G2553;
+IdModule  = Housings_DIP:DIP-20__300;
+EndCmp
+
+BeginCmp
+TimeStamp = /5526DF57;
+Reference = U2;
+ValeurCmp = NRF24L01+;
+IdModule  = Pin_Headers:Pin_Header_Straight_2x04;
+EndCmp
+
+BeginCmp
+TimeStamp = /552695AA;
+Reference = U3;
+ValeurCmp = DIP_SW_4;
+IdModule  = Housings_DIP:DIP-8__300;
+EndCmp
+
+BeginCmp
+TimeStamp = /5526B0E8;
+Reference = Y1;
+ValeurCmp = XTAL;
+IdModule  = Crystals:Crystal_Round_Horizontal_2mm;
+EndCmp
+
+EndListe
