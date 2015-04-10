@@ -35,9 +35,9 @@ DELAY_BETWEEN_SAMPLES = 10
 class GUI(object):
 	def __init__(self, rPI = True):
 		self.rPI = rPI
-		self.PUSH_BUTTONS = (17, 27, 22, 23)
-		self.RDY = 24
-		self.RST = 25
+		self.PUSH_BUTTONS = (22, 23, 25, 25)
+		self.RDY = 17
+		self.RST = 27
 		if self.rPI:
 			import RPi.GPIO as GPIO
 			from Adafruit_CharLCD import Adafruit_CharLCD
