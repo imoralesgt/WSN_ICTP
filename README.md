@@ -19,7 +19,7 @@ ToDo:
   - (DONE) Fix bug: data was being sent with previously stored value after a node went offline
   - (DONE) ThingSpeak server @ Raspberry PI [http://angryelectron.com/how-to-install-a-thingspeak-server/]
   - (DONE) Change baudrate between RPi and MSP430 from 9.6kbps to 115.2kbps
-  - Read sampling period from external text file
+  - (DONE) Read sampling period from external text file
   - Implement a customized Thingspeak server @ RaspberryPI for local data visualization and exporting capabilities
   - Implement a reliable Python class to drive local Thingspeak's client side
   - (DONE) Remove CIK from SC and read it from a text file
