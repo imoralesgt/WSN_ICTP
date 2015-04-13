@@ -100,7 +100,7 @@ void setup() {
     pinMode(STN_CNT_PINS[j], INPUT_PULLUP);
   }
 
-  Serial.begin(9600);
+  Serial.begin(115200);
   
   setTimeOut();
   

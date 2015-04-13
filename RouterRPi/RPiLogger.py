@@ -28,9 +28,8 @@ gauges and displays.
 
 import serial
 import time
+import os
 from exosite import exosite
-
-DELAY_BETWEEN_SAMPLES = 10
 
 class GUI(object):
 	def __init__(self, rPI = True):
@@ -95,14 +94,21 @@ class GUI(object):
 
 class logger(object):
 
-	RF_TIMEOUT = DELAY_BETWEEN_SAMPLES #Timeout seconds between MSP430 uC
+	#RF_TIMEOUT = DELAY_BETWEEN_SAMPLES #Timeout seconds between MSP430 uC
 	#CIK = '8f3af3df6ee1ea3340ef9897ca6c139a160859e6'
+	DELAY_BETWEEN_SAMPLES = 10
+	FAIL_SAFE_TIME = 10
 
-	def __init__(self, rPI = True, url = ""):
+	def __init__(self, rPI = True, url = "", timeoutFileName = 'delay.set'):
 		self.url = url
 		self.rPI = rPI
 		self.fileName = self.getFileName()
 		self.exo = exosite()
+		self.RF_TIMEOUT = self.DELAY_BETWEEN_SAMPLES
+		self.timeoutFileName = timeoutFileName
+		self.setupSamplingPeriod()
+		#newTimeOut = self.getTimeOut(timeoutFileName)
+		#self.setNewTimeout(newTimeOut)
 
 		if rPI:
 			#self.PORT = '/dev/ttyACM0'
@@ -111,8 +117,8 @@ class logger(object):
 		else:
 			self.PORT = 'COM54'
 
-		self.BAUDRATE = 9600
-		self.TIMEOUT = self.RF_TIMEOUT + 10
+		self.BAUDRATE = 115200
+		#self.TIMEOUT = self.RF_TIMEOUT + 10
 		self.openSerial()
 
 		self.gui = GUI(self.rPI)
@@ -124,6 +130,39 @@ class logger(object):
 
 		self.sendTimeOut()
 
+	def getTimeOutFileName(self):
+		return self.timeoutFileName
+
+	def setupSamplingPeriod(self):
+		newTimeOut = self.getTimeOut(self.getTimeOutFileName())
+		self.setNewTimeout(newTimeOut)
+
+
+	def getTimeOut(self, fileName):
+		try:
+			fileName = str(os.path.dirname(os.path.realpath(__file__))) + '/' + fileName
+			tFile = open(fileName, 'r')
+			t = int(tFile.read())
+			tFile.close()
+			return t
+
+		except IOError:
+			print 'TIMEOUT file not found! Using default' + str(self.DELAY_BETWEEN_SAMPLES) + 'seconds setting...'
+			return self.DELAY_BETWEEN_SAMPLES
+
+		except ValueError:
+			print 'Wrong file format!'
+			return self.DELAY_BETWEEN_SAMPLES
+
+		else:
+			print 'Unexpected error :('
+			return self.DELAY_BETWEEN_SAMPLES
+
+	def setNewTimeout(self, newTimeOut):
+		if self.RF_TIMEOUT != newTimeOut:
+			print 'New sampling period setting loaded: ' + str(newTimeOut) + ' seconds'
+			self.RF_TIMEOUT = newTimeOut
+			self.TIMEOUT = self.RF_TIMEOUT + self.FAIL_SAFE_TIME
 
 	def openSerial(self):
 		try:
@@ -246,6 +285,7 @@ log = logger(True)
 try:
 	log.gui.setRDYstate(0)
 	while True:
+		log.setupSamplingPeriod()
 		data = log.readSerial()
 		data = log.cleanSerialData(data)
 		data = log.fixTemperatureFormat(data)
