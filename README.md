@@ -17,9 +17,12 @@ ToDo:
 + Gateway side
   - (DONE) Fix date stamping bug
   - (DONE) Fix bug: data was being sent with previously stored value after a node went offline
+  - (DONE) ThingSpeak server @ Raspberry PI [http://angryelectron.com/how-to-install-a-thingspeak-server/]
   - Change baudrate between RPi and MSP430 from 9.6kbps to 115.2kbps
-  - ThingSpeak server @ Raspberry PI
-  - Remove CIK from SC and read it from a text file
+  - Implement a customized Thingspeak server @ RaspberryPI for data visualization and exporting capabilities
+  - Implement a reliable Python class to drive Thingspeak's client side
+  - (DONE) Remove CIK from SC and read it from a text file
   - Design a PCB (as a Raspberry PI Hat. Using only MSP430 uC, without any Launchpad)
+  - Send PCB to a manufacturing service (Seeed, iTead, etc.)
   - 3D-printable case
   - Highstock graphs for a nice data visualization (http://www.highcharts.com/products/highstock)
