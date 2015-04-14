@@ -74,6 +74,7 @@ void setup() {
   }
 
   Serial.begin(9600);
+ 
   analogReference(INTERNAL1V5); //Set 1.5V internal reference as Vref+
                                 //Used to measure baterry voltage
   radioInit();
@@ -294,15 +295,16 @@ unsigned int splitBufferToTimeOut(char *buffer){
   token = strtok(buffer, search);
   while(token != NULL){
     strcpy(data[i], token);
-    //Serial.println(data[i]);
-    strcpy(basura, data[i]); //Simply it doesn't work if I don't do this
+    Serial.println(data[i]); //Bulky code. Doesn't work without this debugging line :S
+    //strcpy(basura, data[i]); //Simply it doesn't work if I don't do this
     token = strtok(NULL, search);
     i++;
   }
+  //Serial.println(data[1]);
   if(!strcmp(data[0], STR_RQST_DATA)){
+    //Serial.println(data[1]);
     return atoi(data[1]);
   }else{
     return 0;
   }
 }
-
