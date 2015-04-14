@@ -8,21 +8,20 @@ along with an MSP430G2553 Microcontroller-based router station.
 
 Data will be sent from uC to this server via UART (ttyAMA0), and then,
 logged on a CSV file (which may be used to automate some stuff later on).
-By now, RPi's job is to log and upload real-time data to the Cloud
 
+By now, RPi's job is to log and upload real-time data to the Cloud
 This script will be launched as a daemon (init.d) and will notify
 the uC when system is ready to start logging data.
 
 User interface is done via a CharLCD and a couple of push-buttons.
 
 Using Adafruit_CharLCD and RPi.GPIO libraries to implement GPIO functionality
-
 User will be prompted to enter current date/time only once, everytime
 the OS boots.
 
 Some functionality will be also implemented in order to send sensors' data
 to exosite (http://www.exosite.com) so readings coming from WSN may be plotted
-and seen in real-time from anywhere around the world through fancy good-looking
+and seen in real-time from anywhere around the world through fancy nice-looking
 gauges and displays.
 """
 
@@ -74,7 +73,7 @@ class GUI(object):
 
 	def sendRST(self):
 		self.setRSTstate(0)
-		time.sleep(0.01)
+		time.sleep(0.08)
 		self.setRSTstate(1)
 
 	def lcdClear(self):
@@ -106,7 +105,8 @@ class logger(object):
 		self.exo = exosite()
 		self.RF_TIMEOUT = self.DELAY_BETWEEN_SAMPLES
 		self.timeoutFileName = timeoutFileName
-		self.setupSamplingPeriod()
+		self.gui = GUI(self.rPI)
+		
 		#newTimeOut = self.getTimeOut(timeoutFileName)
 		#self.setNewTimeout(newTimeOut)
 
@@ -118,17 +118,15 @@ class logger(object):
 			self.PORT = 'COM54'
 
 		self.BAUDRATE = 115200
-		#self.TIMEOUT = self.RF_TIMEOUT + 10
-		self.openSerial()
+		self.TIMEOUT = self.RF_TIMEOUT + self.FAIL_SAFE_TIME
+		#self.openSerial()
 
-		self.gui = GUI(self.rPI)
+		self.setupSamplingPeriod()
 
 		self.gui.setRDYstate(1)
 		self.gui.setRDYstate(0)
 
 		time.sleep(0.5)
-
-		self.sendTimeOut()
 
 	def getTimeOutFileName(self):
 		return self.timeoutFileName
@@ -163,6 +161,11 @@ class logger(object):
 			print 'New sampling period setting loaded: ' + str(newTimeOut) + ' seconds'
 			self.RF_TIMEOUT = newTimeOut
 			self.TIMEOUT = self.RF_TIMEOUT + self.FAIL_SAFE_TIME
+			self.closeSerial()
+			self.gui.sendRST()
+			self.openSerial()
+			time.sleep(0.3)
+			self.sendTimeOut()
 
 	def openSerial(self):
 		try:
@@ -193,6 +196,7 @@ class logger(object):
 
 
 	def sendTimeOut(self):
+		print 'Mi RF_TIMEOUT --> ' + str(self.RF_TIMEOUT)
 		self.uart.write(str(self.RF_TIMEOUT) + ';')
 
 	def cleanSerialData(self, data):
