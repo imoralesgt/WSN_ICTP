@@ -295,7 +295,8 @@ unsigned int splitBufferToTimeOut(char *buffer){
   token = strtok(buffer, search);
   while(token != NULL){
     strcpy(data[i], token);
-    Serial.println(data[i]); //Bulky code. Doesn't work without this debugging line :S
+    //Serial.println(data[i]); //Bulky code. Doesn't work without this debugging line :S
+    Serial.print(NULL); //Bulky code. Doesn't work without this debugging line :S
     //strcpy(basura, data[i]); //Simply it doesn't work if I don't do this
     token = strtok(NULL, search);
     i++;
