@@ -23,7 +23,7 @@ ToDo:
   - Implement a customized Thingspeak server @ RaspberryPI for local data visualization and exporting capabilities
   - Implement a reliable Python class to drive local Thingspeak's client side
   - ```(DONE) Remove CIK from SC and read it from a text file```
-  - Design a PCB (as a Raspberry PI Hat. Using only MSP430 uC, without any Launchpad)
-  - Send PCB to a manufacturing service (Seeed, iTead, etc.)
+  - ```(DONE) Design a PCB (as a Raspberry PI Hat. Using only MSP430 uC, without any Launchpad)```
+  - ```(DONE) Send PCB to a manufacturing service (Seeed, iTead, etc.)```
   - 3D-printable case
   - Highstock graphs for a nice data visualization (http://www.highcharts.com/products/highstock)
