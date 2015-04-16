@@ -1,4 +1,25 @@
-Cmp-Mod V01 Created by Cvpcb (after 2015-mar-04 BZR unknown)-product   date = 10/04/2015 15:04:31
+Cmp-Mod V01 Created by Cvpcb (after 2015-mar-04 BZR unknown)-product   date = 15/04/2015 11:38:01
+
+BeginCmp
+TimeStamp = /552E3E0E;
+Reference = C1;
+ValeurCmp = 1nF;
+IdModule  = Capacitors_SMD:C_1206_HandSoldering;
+EndCmp
+
+BeginCmp
+TimeStamp = /552E3134;
+Reference = C2;
+ValeurCmp = 10uF;
+IdModule  = Capacitors_Tantalum_SMD:TantalC_SizeA_EIA-3216_HandSoldering;
+EndCmp
+
+BeginCmp
+TimeStamp = /552E202E;
+Reference = C3;
+ValeurCmp = 100nF;
+IdModule  = Capacitors_SMD:C_1206_HandSoldering;
+EndCmp
 
 BeginCmp
 TimeStamp = /55269403;
@@ -24,7 +45,7 @@ EndCmp
 BeginCmp
 TimeStamp = /552864D4;
 Reference = P3;
-ValeurCmp = CONN_01X06;
+ValeurCmp = AUX;
 IdModule  = Pin_Headers:Pin_Header_Straight_1x06;
 EndCmp
 
@@ -38,14 +59,21 @@ EndCmp
 BeginCmp
 TimeStamp = /5527059E;
 Reference = R2;
-ValeurCmp = 270;
+ValeurCmp = 220;
 IdModule  = Resistors_SMD:R_1206_HandSoldering;
 EndCmp
 
 BeginCmp
 TimeStamp = /55269558;
 Reference = R3;
-ValeurCmp = 1k;
+ValeurCmp = 220;
+IdModule  = Resistors_SMD:R_1206_HandSoldering;
+EndCmp
+
+BeginCmp
+TimeStamp = /552E3FAE;
+Reference = R4;
+ValeurCmp = 47k;
 IdModule  = Resistors_SMD:R_1206_HandSoldering;
 EndCmp
 
