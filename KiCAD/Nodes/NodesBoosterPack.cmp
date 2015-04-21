@@ -1,0 +1,115 @@
+Cmp-Mod V01 Created by Cvpcb (after 2015-mar-04 BZR unknown)-product   date = 20/04/2015 16:27:57
+
+BeginCmp
+TimeStamp = /5534FD15;
+Reference = C1;
+ValeurCmp = 1uF;
+IdModule  = Capacitors_Tantalum_SMD:TantalC_SizeA_EIA-3216_HandSoldering;
+EndCmp
+
+BeginCmp
+TimeStamp = /55350A68;
+Reference = C2;
+ValeurCmp = 100nF;
+IdModule  = Capacitors_SMD:C_1206_HandSoldering;
+EndCmp
+
+BeginCmp
+TimeStamp = /5534FD3A;
+Reference = C3;
+ValeurCmp = 10nF;
+IdModule  = Capacitors_SMD:C_1206_HandSoldering;
+EndCmp
+
+BeginCmp
+TimeStamp = /5534E5A2;
+Reference = D1;
+ValeurCmp = LED;
+IdModule  = LEDs:LED-1206;
+EndCmp
+
+BeginCmp
+TimeStamp = /551A748F;
+Reference = P1;
+ValeurCmp = CONN_01X02;
+IdModule  = Libraries:BAT_HOLDER_2xAA;
+EndCmp
+
+BeginCmp
+TimeStamp = /5534FBA0;
+Reference = P2;
+ValeurCmp = CONN_01X02;
+IdModule  = Pin_Headers:Pin_Header_Straight_2x01;
+EndCmp
+
+BeginCmp
+TimeStamp = /553505E4;
+Reference = P3;
+ValeurCmp = CONN_01X04;
+IdModule  = Pin_Headers:Pin_Header_Straight_1x04;
+EndCmp
+
+BeginCmp
+TimeStamp = /5534E676;
+Reference = R1;
+ValeurCmp = 470;
+IdModule  = Resistors_SMD:R_1206_HandSoldering;
+EndCmp
+
+BeginCmp
+TimeStamp = /5534FDFA;
+Reference = R2;
+ValeurCmp = 47k;
+IdModule  = Resistors_SMD:R_1206_HandSoldering;
+EndCmp
+
+BeginCmp
+TimeStamp = /551A6C3B;
+Reference = U1;
+ValeurCmp = NRF24L01+;
+IdModule  = Pin_Headers:Pin_Header_Straight_2x04;
+EndCmp
+
+BeginCmp
+TimeStamp = /5534C624;
+Reference = U2;
+ValeurCmp = MSP430G2553;
+IdModule  = Housings_DIP:DIP-20__300;
+EndCmp
+
+BeginCmp
+TimeStamp = /551A71AF;
+Reference = U3;
+ValeurCmp = BH1750;
+IdModule  = Pin_Headers:Pin_Header_Straight_1x05;
+EndCmp
+
+BeginCmp
+TimeStamp = /551A71CD;
+Reference = U4;
+ValeurCmp = BMP180;
+IdModule  = Pin_Headers:Pin_Header_Straight_1x04;
+EndCmp
+
+BeginCmp
+TimeStamp = /551A7201;
+Reference = U5;
+ValeurCmp = DHT11;
+IdModule  = Pin_Headers:Pin_Header_Straight_1x04;
+EndCmp
+
+BeginCmp
+TimeStamp = /551A6F41;
+Reference = U6;
+ValeurCmp = DIP_SW_4;
+IdModule  = Housings_DIP:DIP-8__300;
+EndCmp
+
+BeginCmp
+TimeStamp = /5534C78E;
+Reference = Y1;
+ValeurCmp = Crystal;
+IdModule  = Crystals:Crystal_Round_Horizontal_3mm_BigPad;
+EndCmp
+
+EndListe
