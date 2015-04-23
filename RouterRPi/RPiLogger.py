@@ -29,6 +29,8 @@ import serial
 import time
 import os
 from exosite import exosite
+from thingSpeak import Channels
+import thread
 
 class GUI(object):
 	def __init__(self, rPI = True):
@@ -106,6 +108,8 @@ class logger(object):
 		self.RF_TIMEOUT = self.DELAY_BETWEEN_SAMPLES
 		self.timeoutFileName = timeoutFileName
 		self.gui = GUI(self.rPI)
+		#self.ts  = Channels("192.168.88.195:3000") #Only for debugging purposes only
+		self.ts  = Channels()
 		
 		#newTimeOut = self.getTimeOut(timeoutFileName)
 		#self.setNewTimeout(newTimeOut)
@@ -196,7 +200,7 @@ class logger(object):
 
 
 	def sendTimeOut(self):
-		print 'Mi RF_TIMEOUT --> ' + str(self.RF_TIMEOUT)
+		#print 'Mi RF_TIMEOUT --> ' + str(self.RF_TIMEOUT)
 		self.uart.write(str(self.RF_TIMEOUT) + ';')
 
 	def cleanSerialData(self, data):
@@ -237,6 +241,14 @@ class logger(object):
 			archivo.close()
 		except:
 			archivo.close()
+
+	def uploadThingSpeak(self, data):
+		node, newData = self.ts.formatAndUpdateData(data)
+		if(newData):
+			self.ts.updateChannel(int(node) - 1, newData)
+		else:
+			'No se puede subir a ThingSpeak'
+
 
 	def uploadData(self, data):
 		if(self.exo.formatAndUpdateData(data)):
@@ -297,6 +309,7 @@ try:
 		if len(data) > 3:
 			log.appendData(data)
 			log.uploadData(data[:-1])
+			thread.start_new_thread(log.uploadThingSpeak,(data[:-1],))
 			print data,
 			log.gui.lcdClear()
 			log.gui.lcdMessage(str(data))
