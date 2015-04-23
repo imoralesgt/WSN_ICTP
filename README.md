@@ -20,8 +20,8 @@ ToDo:
   - ```(DONE) ThingSpeak server @ Raspberry PI [http://angryelectron.com/how-to-install-a-thingspeak-server/]```
   - ```(DONE) Change baudrate between RPi and MSP430 from 9.6kbps to 115.2kbps```
   - ```(DONE) Read sampling period from external text file```
-  - Implement a customized Thingspeak server @ RaspberryPI for local data visualization and exporting capabilities
-  - Implement a reliable Python class to drive local Thingspeak's client side
+  - ```(DONE) Implement a customized Thingspeak server @ RaspberryPI for local data visualization and exporting capabilities```
+  - ```(DONE) Implement a reliable Python class to drive local Thingspeak's client side```
   - ```(DONE) Remove CIK from SC and read it from a text file```
   - ```(DONE) Design a PCB (as a Raspberry PI Hat. Using only MSP430 uC, without any Launchpad)```
   - ```(DONE) Send PCB to a manufacturing service (Seeed, iTead, etc.)```
