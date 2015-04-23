@@ -10,7 +10,8 @@ ToDo:
   - Improve battery lifetime
     * ```(DONE) [Nothing to fix :'(] May be turning sensors off should be the best solution (radios are working great)```
     * Firmware fine-tuning and optimization
-  - Design a PCB to allocate MSP430, radio and sensors (without using any Launchpad)
+  - ```(DONE) Design a PCB to allocate MSP430, radio and sensors (without Launchpad)```
+  - ```(DONE) Send PCB to a manufacturing service (Seeed, iTead, etc.)```
   - 3D-printable case
 
 
