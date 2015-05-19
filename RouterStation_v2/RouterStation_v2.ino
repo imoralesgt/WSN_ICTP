@@ -41,8 +41,6 @@ byte STATIONS_COUNT = 0;
 unsigned int sensorData[DATA_LEN];
 byte failed=0; //Failed attempts to get data in current sampling
 
-byte ledStatus = 0;
-
 
 void dump_radio_status_to_serialport(uint8_t);
 
@@ -85,16 +83,6 @@ void setTimeOut(void){
   }
 }
 
-void startupLedBlink(void){
-  int i;
-  for(i = 0; i < 6; i++){
-    digitalWrite(RED_LED, 1);
-    delay(50);
-    digitalWrite(RED_LED, 0);
-    delay(50);
-  }
-}
-
 void setup() {
 
   int j;
@@ -107,8 +95,6 @@ void setup() {
   pinMode(RED_LED, OUTPUT);
   digitalWrite(RED_LED, 0);
   pinMode(PUSH2, INPUT_PULLUP);
-  
-  startupLedBlink();
 
   for(j = 0; j < 3; j++){
     pinMode(STN_CNT_PINS[j], INPUT_PULLUP);
@@ -356,8 +342,6 @@ void loop() {
 
 interrupt(TIMER1_A0_VECTOR) Tic_Tac(void){
   rtc.Inc_sec();
-  ledStatus = ~ledStatus;
-  digitalWrite(RED_LED, ledStatus);
   __bic_status_register(LPM1_bits);
 }
 

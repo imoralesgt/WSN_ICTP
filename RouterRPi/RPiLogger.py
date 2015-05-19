@@ -97,7 +97,7 @@ class logger(object):
 
 	#RF_TIMEOUT = DELAY_BETWEEN_SAMPLES #Timeout seconds between MSP430 uC
 	#CIK = '8f3af3df6ee1ea3340ef9897ca6c139a160859e6'
-	DELAY_BETWEEN_SAMPLES = 0
+	DELAY_BETWEEN_SAMPLES = 10
 	FAIL_SAFE_TIME = 10
 
 	def __init__(self, rPI = True, url = "", timeoutFileName = 'delay.set'):
@@ -210,14 +210,11 @@ class logger(object):
 		ALLOWED_CHARACTERS.extend(range(97,123))
 
 		newData = ''
-		try:
-			for i in data:
-				if ord(i) in ALLOWED_CHARACTERS:
-					newData += i
-			return newData
-		except TypeError:
-			print 'Puerto serial vacio!'
-			return ''
+
+		for i in data:
+			if ord(i) in ALLOWED_CHARACTERS:
+				newData += i
+		return newData
 
 
 	def fixTemperatureFormat(self, data):
