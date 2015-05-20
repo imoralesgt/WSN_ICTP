@@ -334,6 +334,9 @@ void loop() {
 
   failed = 0; //Remove deadtime if failure in reading sensor happens
   //This is to improve nodes' battery life
+  
+  countRemoteStations(); //This will allow station counter to be changed on the fly
+  
   for(stn = 1; stn <= STATIONS_COUNT; stn++){
     delay(50);
     if(RQSTandReadData(stn, inbuf)){
