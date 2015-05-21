@@ -10,6 +10,14 @@
 		<center>
 
 			<h2> Per&iacute;odo de muestreo </h2>
+			Valor actual: 
+			<?php
+				$fd = fopen('delay.set', 'r');
+				$myVal = fgets($fd);
+				echo "".$myVal."";
+				echo " segundos <br /><br />";
+			?>
+			<u>Establecer nuevo valor</u>
 			<br />
 			MINUTOS:SEGUNDOS
 			<form action = "delay.php">
