@@ -32,6 +32,7 @@ const uint8_t txaddr[] = { 0xDE, 0xAD, 0xBE, 0xEF, 0x00 };
 unsigned int TIME_OUT = 10; //Timeout before enabling RX radio
 unsigned int now, start;
 int32_t sensorData[SENSOR_COUNT]; //Temp, Pres, Lux, Hum
+char firstTime;
 
 
 const char *str_on = "ON";
@@ -81,8 +82,13 @@ void setup() {
   
   //dump_radio_status_to_serialport(radio.radioState());
   
+  
+  firstTime = 1;
+  
   pinMode(P1_0, OUTPUT);
   digitalWrite(P1_0, LOW);
+  
+  
   
   startupLedBlink();
 
@@ -126,6 +132,11 @@ void loop() {
          //int hum = humSensor.temperature;
          
          uint16_t lux = lightMeter.readLightLevel();
+         if (firstTime){ //Fixed null first sampling bug
+           lux = lightMeter.readLightLevel(); 
+           lux = lightMeter.readLightLevel();
+           firstTime = 0;
+         }
          uint16_t bat = analogRead(11);
          bat = 60*bat/1023; 
          bat = 50*bat; //Converting ADC reading to voltage (mV)
