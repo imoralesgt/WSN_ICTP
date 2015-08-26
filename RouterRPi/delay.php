@@ -20,7 +20,7 @@
 					$t += ((int) $min) *60;
 				}
 
-				if ((($sec > 0)||($min > 0)) && ($sec < 60)){
+				if ((($sec > 0)||($t > 0)) && ($sec < 60)){
 					$t += (int) $sec;
 				}else{
 					$ok = 0;
